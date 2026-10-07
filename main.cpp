@@ -20,12 +20,12 @@ public:
             prices[i] = (rand() % (MAX - MIN + 1) + MIN) / (double) 100;
     }
 
-    Chair(int l) {
+    Chair(int l, double p[SIZE]) {
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
-    }
+            prices[i] = p[i];
+}
     
 // setters and getters
     void setLegs(int l) { legs = l; }
@@ -54,14 +54,15 @@ public:
 
 int main() {
 cout << fixed << setprecision(2);
+srand(time(0));
 //creating pointer to first chair object
 Chair *chairPtr = new Chair;
 chairPtr->setLegs(4);
 chairPtr->setPrices(121.21, 232.32, 414.14);
 chairPtr->print();
 //creating dynamic chair object with constructor
-Chair *livingChair = new Chair(3);
-livingChair->setPrices(525.25, 434.34, 252.52);
+double chairPrices[SIZE] = {525.25, 434.34, 252.52};
+Chair *livingChair = new Chair(3, chairPrices);
 livingChair->print();
 delete livingChair;
 livingChair = nullptr;
